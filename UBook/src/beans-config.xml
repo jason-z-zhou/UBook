@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<manager-class>
+		<manager id="onlineBook.manager.BookManager" class="onlineBook.manager.BookManagerImpl"/>
+		<manager id="onlineBook.manager.UserManager" class="onlineBook.manager.UserManagerImpl"/>
+		<manager id="onlineBook.manager.UserOrderManager" class="onlineBook.manager.UserOrderManagerImpl"/>
+	</manager-class>
+	<dao-class>
+		<dao id="onlineBook.dao.BookDao" class="onlineBook.dao.BookDaoImpl" />	
+		<dao id="onlineBook.dao.UserDao" class="onlineBook.dao.UserDaoImpl" />
+		<dao id="onlineBook.dao.UserOrderDao" class="onlineBook.dao.UserOrderDaoImpl" />
+	</dao-class>
+</beans>

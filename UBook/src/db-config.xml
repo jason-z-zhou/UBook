@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<db-info>
+		<driver-name>org.gjt.mm.mysql.Driver</driver-name>
+		<url>jdbc:mysql://localhost/onlineBook</url>
+		<user-name>root</user-name>
+		<password>root</password>
+	</db-info>
+	
+</config>
+
