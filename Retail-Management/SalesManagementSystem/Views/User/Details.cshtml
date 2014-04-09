@@ -1,0 +1,61 @@
+﻿@model SalesManagementSystem.Models.User
+
+@{
+    ViewBag.Title = "用户详细信息";
+}
+
+<div class="portlet grid_12">
+        <header>
+            <h2>用户信息</h2>
+        </header>
+        <section>
+        @using (Html.BeginForm("Create", "User", FormMethod.Post, new { @class = "form has-validation" }))
+        {
+                    @Html.ValidationSummary(true)
+                <div class="clearfix">
+                    @Html.LabelFor((model => model.UserName), new { @class = "form-label no-description" }, false)
+                    <div class="form-input">@Html.DisplayFor(model => model.UserName)</div>
+                </div>
+    
+                <div class="clearfix">
+                    @Html.LabelFor((model => model.LastName), new { @class = "form-label no-description" }, false)
+                    <div class="form-input">@Html.DisplayFor(model => model.LastName)</div>
+                </div>
+
+                <div class="clearfix">
+                    @Html.LabelFor((model => model.FirstName), new { @class = "form-label no-description" }, false)
+                    <div class="form-input">@Html.DisplayFor(model => model.FirstName)</div>
+                </div>
+    
+                <div class="clearfix">
+                    @Html.LabelFor((model => model.Email), new { @class = "form-label no-description" }, false)
+                    <div class="form-input">@Html.DisplayFor(model => model.Email)</div>
+                </div>
+    
+                <div class="clearfix">
+                    @Html.LabelFor((model => model.Tel), new { @class = "form-label no-description" }, false)
+                    <div class="form-input">@Html.DisplayFor(model => model.Tel)</div>
+                </div>
+            
+                <div class="clearfix">
+                     <label class="form-label no-description" for="Roles">角色</label>
+                       <div class="form-input">
+                        <label><input @ViewBag.CheckedList[1] disabled="" id="roles1" name="Roles" type="checkbox" value="1" /> 系统管理员</label>
+                        <label><input @ViewBag.CheckedList[3] disabled="" id="roles3" name="Roles" type="checkbox" value="3" /> 产品管理员</label>
+                        <label><input @ViewBag.CheckedList[5] disabled="" id="roles5" name="Roles" type="checkbox" value="5" /> 评审条目管理员</label>     
+                        <label><input @ViewBag.CheckedList[7] disabled="" id="roles7" name="Roles" type="checkbox" value="7" /> 销售员</label>                   
+                      <br/>
+
+                        <label><input @ViewBag.CheckedList[2] disabled="" id="roles2" name="Roles" type="checkbox" value="2" /> 员工管理员</label>
+                        <label><input @ViewBag.CheckedList[6] disabled="" id="roles6" name="Roles" type="checkbox" value="6" /> 业务评审员</label>
+                        <label><input @ViewBag.CheckedList[4] disabled="" id="roles4" name="Roles" type="checkbox" value="4" /> 销售点管理员</label>
+                    </div>
+                </div>
+                
+                <div class="form-action clearfix">
+        <input type="button" value = "编辑" onClick="location.href='@Url.Action("Edit", new { id = Model.UserID })'"/>
+        <input type="button" value = "返回上一页" onClick="location.href='javascript:history.go(-1);'"/>
+    </div>
+        }
+        </section>
+</div>

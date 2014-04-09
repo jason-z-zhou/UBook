@@ -1,0 +1,37 @@
+﻿@model SalesManagementSystem.Models.Category
+
+@{
+    ViewBag.Title = "商品类型";
+}
+
+<div class="portlet grid_12">
+        <header>
+            <h2>产品分类详细信息</h2>
+        </header>
+        <section>
+@using (Html.BeginForm("Details", "Category", FormMethod.Post, new { @class = "form has-validation" }))
+{
+    @Html.ValidationSummary(true)
+
+                                <div class="clearfix">
+
+                                    @Html.LabelFor((model => model.CategoryName), new { @class = "form-label no-description" })
+
+                                    <div class="form-input">@Html.DisplayFor(model => model.CategoryName)</div>
+
+                                </div>
+                                 <div class="clearfix">
+
+                                    @Html.LabelFor((model => model.Description), new { @class = "form-label no-description" })
+
+                                    <div class="form-input">@Html.DisplayFor(model => model.Description)</div>
+
+                                </div>
+                              
+                                <div class="clearfix">
+                                      <p>@Html.ActionLink("返回", "Index")</p>
+                                </div>
+
+}
+        </section>
+</div>

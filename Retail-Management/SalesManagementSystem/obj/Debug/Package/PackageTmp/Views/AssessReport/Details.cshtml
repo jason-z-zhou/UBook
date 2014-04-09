@@ -1,0 +1,36 @@
+﻿@model SalesManagementSystem.Models.AssessReport
+
+@{
+    ViewBag.Title = "评估详情";
+}
+<div class="portlet grid_12">
+        <header>
+            <h2>评估信息</h2>
+        </header>
+        <section>
+        @using (Html.BeginForm("Create", "AssessReport", FormMethod.Post, new { @class = "form has-validation" }))
+        {
+             @Html.ValidationSummary(true)
+                <div class="clearfix">
+                    @Html.LabelFor((model => model.StoreID), new { @class = "form-label no-description" }, false)
+                    <div class="form-input">@Html.DisplayFor(model => model.StoreID)</div>
+                </div>
+                <div class="clearfix">
+                    @Html.LabelFor((model => model.Store.StoreName), new { @class = "form-label no-description" }, false)
+                    <div class="form-input">@Html.DisplayFor(model => model.Store.StoreName)</div>
+                </div>
+                <div class="clearfix">
+                    @Html.LabelFor((model => model.Reviewer.UserName), new { @class = "form-label no-description" }, false)
+                    <div class="form-input">@Html.DisplayFor(model => model.Reviewer.UserName)</div>
+                </div>
+                <div class="clearfix">
+                    @Html.LabelFor((model => model.AssessTime), new { @class = "form-label no-description" }, false)
+                    <div class="form-input">@Html.DisplayFor(model => model.AssessTime)</div>
+                </div>
+                <div class="clearfix">
+                    @Html.LabelFor(model=>model.Grade)
+
+                </div>
+        }
+        </section>
+</div>

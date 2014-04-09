@@ -1,0 +1,24 @@
+﻿@model SalesManagementSystem.Models.AssessReport
+@{
+    ViewBag.Title = "修改报表";
+}
+
+<div class="portlet grid_12">
+        <header>
+            <h2>报表信息</h2>
+        </header>
+<section>
+@using (Html.BeginForm("Edit", "AssessReport", FormMethod.Post, new { @class = "form has-validation" }))
+{
+           
+                @Html.HiddenFor(model => model.AssessReportID)
+                @Html.HiddenFor(model => model.UserID)
+                @Html.HiddenFor(model => model.StoreID)
+                <div class="clearfix">
+                    @Html.LabelFor((model => model.Grade), new { @class = "form-label no-description" }, false)
+                    <div class="form-input" >@Html.EditorFor(model => model.Grade)</div>
+                </div>
+}
+
+</section>
+</div>

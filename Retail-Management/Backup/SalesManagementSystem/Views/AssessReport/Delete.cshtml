@@ -1,0 +1,38 @@
+﻿@model SalesManagementSystem.Models.AssessReport
+
+@{
+    ViewBag.Title = "删除评估报表";
+}
+
+<div class="portlet grid_12">
+    <header>
+        <h2>评估报表信息</h2>
+    </header>
+<section>
+
+
+@using (Html.BeginForm("Edit", "User", FormMethod.Post, new { @class = "form has-validation" }))
+{
+    <div class="clearfix">
+
+        @Html.LabelFor((model => model.UserID), new { @class = "form-label no-description" })
+
+        <div class="form-input">@Html.Label(Model.UserID.ToString())</div>
+
+        @Html.LabelFor((model => model.StoreID), new { @class = "form-label no-description" })
+
+        <div class="form-input">@Html.Label(Model.StoreID.ToString())</div>
+
+        @Html.LabelFor((model => model.AssessTime), new { @class = "form-label no-description" })
+
+        <div class="form-input">@Html.Label(Model.AssessTime.ToString())</div>
+
+        @Html.LabelFor((model => model.Grade), new { @class = "form-label no-description" })
+
+        <div class="form-input">@Html.Label(Model.Grade.ToString())</div>
+
+    </div>
+}
+
+</section>
+</div>

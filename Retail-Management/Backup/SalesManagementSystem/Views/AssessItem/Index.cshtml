@@ -1,0 +1,13 @@
+﻿@model IEnumerable<SalesManagementSystem.Models.AssessItem>
+
+@{
+    ViewBag.Title = "评分条目列表";
+}
+
+
+                    <div class="grid_12">
+
+                        <div id="demo" class="clearfix"> 
+@Html.DataTables((SalesManagementSystem.Models.DataTables)ViewBag.DataTable, "<a href='" + Url.Action("Edit") + "/{0}'>编辑</a>" + "|" + "<a href='" + Url.Action("Details") + "/{0}'>详情</a>" + "|" + "<a href='" + Url.Action("Delete") + "/{0}'>删除</a>")
+                        </div> 
+                    </div>   

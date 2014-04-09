@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "商品列表";
+}
+
+                    
+<div class="grid_12">
+    <div id="demo" class="clearfix"> 
+        @Html.DataTables((SalesManagementSystem.Models.DataTables)ViewBag.DataTable, "<a href='" + Url.Action("Edit") + "/{0}'>编辑</a>" + "|" + "<a href='" + Url.Action("Details") + "/{0}'>详细</a>" + "|" + "<a href='" + Url.Action("Delete") + "/{0}'>删除</a>")
+    </div> 
+    <div class="form-action clearfix">
+        <input type="button" value = "增加新商品" onClick="location.href='@Url.Action("Create", "Commodity")'"/>
+     </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,49 @@
+﻿@model SalesManagementSystem.Models.User
+
+@{
+    ViewBag.Title = "删除用户";
+}
+
+<div class="portlet grid_12">
+        <header>
+            <h2>用户信息</h2>
+        </header>
+        <section>
+@using (Html.BeginForm("Delete", "User", FormMethod.Post, new { @class = "form has-validation" }))
+        {
+     @Html.ValidationSummary(true)
+    <div class="clearfix">
+        @Html.LabelFor((model => model.UserName), new { @class = "form-label no-description" }, false)
+        <div class="form-input">@Html.DisplayFor(model => model.UserName)</div>
+    </div>
+    
+    <div class="clearfix">
+        @Html.LabelFor((model => model.LastName), new { @class = "form-label no-description" }, false)
+        <div class="form-input">@Html.DisplayFor(model => model.LastName)</div>
+    </div>
+
+    <div class="clearfix">
+        @Html.LabelFor((model => model.FirstName), new { @class = "form-label no-description" }, false)
+        <div class="form-input">@Html.DisplayFor(model => model.FirstName)</div>
+    </div>
+    
+    <div class="clearfix">
+        @Html.LabelFor((model => model.Email), new { @class = "form-label no-description" }, false)
+        <div class="form-input">@Html.DisplayFor(model => model.Email)</div>
+    </div>
+    
+    <div class="clearfix">
+        @Html.LabelFor((model => model.Tel), new { @class = "form-label no-description" }, false)
+        <div class="form-input">@Html.DisplayFor(model => model.Tel)</div>
+    </div>
+    
+    <div class="form-action clearfix">
+        <input type="submit" value="删除" /> 
+        <input type="button" value = "返回上一页" onClick="location.href='javascript:history.go(-1);'"/>
+    </div>
+        }
+
+      </section>
+</div>
+
+

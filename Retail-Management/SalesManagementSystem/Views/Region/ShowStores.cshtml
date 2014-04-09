@@ -1,0 +1,18 @@
+﻿@model IEnumerable<SalesManagementSystem.Models.Store>
+
+@{
+    ViewBag.Title = ViewBag.RegionName + "销售点列表";
+}
+
+<p>
+    @Html.ActionLink("返回片区列表", "Index")
+    @Html.ActionLink("返回片区信息", "Details")
+</p>
+
+<p style="font-size: 12pt;">      
+                    
+       <div class="grid_12">
+        <div id="demo" class="clearfix"> 
+             @Html.DataTables((SalesManagementSystem.Models.DataTables)ViewBag.DataTable)
+                        </div> 
+                    </div>

@@ -1,0 +1,117 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using SalesManagementSystem.Models;
+
+namespace SalesManagementSystem.Controllers
+{
+    public class SalesRecordController : Controller
+    {
+        //
+        // GET: /SalesRecord/
+        EntityContext db = new EntityContext();
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        //
+        // GET: /SalesRecord/Details/5
+
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        //
+        // GET: /SalesRecord/Create
+
+        public ActionResult Create()
+        {
+            List<Category> categoriesList = db.Categories.ToList();
+            SelectList categories = new SelectList(categoriesList, "CategoryID", "CategoryName");
+            ViewBag.CategoryID = categories;
+            IEnumerable<SelectListItem> items = ((User)Session["CurrentUser"]).StoresBelonged
+                .Select(c => new SelectListItem
+                {
+                    Value = c.StoreID.ToString(),
+                    Text = c.StoreName
+                });
+            ViewBag.StoreID = items;
+            return View();
+        } 
+
+        //
+        // POST: /SalesRecord/Create
+
+        [HttpPost]
+        public ActionResult Create(FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add insert logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        
+        //
+        // GET: /SalesRecord/Edit/5
+ 
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        //
+        // POST: /SalesRecord/Edit/5
+
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add update logic here
+ 
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        //
+        // GET: /SalesRecord/Delete/5
+ 
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        //
+        // POST: /SalesRecord/Delete/5
+
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+ 
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+    }
+}

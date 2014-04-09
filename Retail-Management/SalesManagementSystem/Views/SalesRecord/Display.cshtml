@@ -1,0 +1,15 @@
+﻿@model IEnumerable<SalesManagementSystem.Models.SalesRecord>
+
+@{
+    ViewBag.Title = ViewBag.StoreName + "销售记录列表";
+}
+         
+    <div class="grid_12">
+        <div id="demo" class="clearfix"> 
+            @Html.DataTables((SalesManagementSystem.Models.DataTables)ViewBag.DataTable)
+        </div>
+        <div class="form-action clearfix">
+            <input type="button" value = "增加新销售记录" onClick="location.href='@Url.Action("Create", "SalesRecord")'"/>
+            <input type="button" value = "分析销售纪录" onClick="location.href='@Url.Action("Analyse", "SalesRecord" , new {id = ViewBag.UserID })'"/>
+        </div>
+    </div>

@@ -1,0 +1,80 @@
+﻿@model SalesManagementSystem.Models.SalesRecord
+
+@{
+    ViewBag.Title = "添加销售记录";
+}
+                    <div class="portlet grid_12">
+                        <header>
+                            <h2>销售记录</h2>
+                        </header>
+                        <section>
+                        <script type="text/javascript">
+
+                            $().ready(function () {
+
+                                $('#CategoryID').change(function () {
+                                    var sltId = $(this).val();
+                                    $.getJSON('@Url.Action("AjaxGetCommodity", "Category")', { 'CategoryID': sltId }, function (data, status) {
+                                        initSelect($('#CommodityID'), data);
+                                    });
+                                });
+                            })
+
+                            // slt:select的jQuery包装集
+                            // rs:以json形式返回的数据
+                            function initSelect(slt, rs) {
+                                slt.empty();
+                                if (rs.length > 0) {
+                                    for (var i = 0; i < rs.length; i++) {
+                                        slt.append("<option value='" + rs[i]['id'] + "'>" + rs[i]['name'] + "</option>");
+                                    }
+                                }
+                                else slt.append("<option value='-1'>该类暂无商品</option>");
+                                slt.get(0).selectedIndex = 0;
+                                $.uniform.update(); 
+                            }
+</script>
+
+@using (Html.BeginForm("Create", "SalesRecord", FormMethod.Post, new { @class = "form has-validation" }))
+{
+    @Html.ValidationSummary(true)
+    
+                               <div class="clearfix">
+                               @Html.LabelFor(model => model.Store, new { @class = "form-label no-decription" }, true)
+                                    <div class="form-input">
+                                     @Html.DropDownList("StoreID", (IEnumerable<SelectListItem>)ViewBag.StoreID)
+                                     </div>
+                                </div>
+                               <div class="clearfix">
+                               @Html.LabelFor(model => model.Date, new { @class = "form-label no-decription" }, true)
+                                    <div class="form-input">
+                                     <input type="date" id="Date" name="Date" class="text-box single-line"    required="required" data-val-required="销售日期 字段是必需的。"/>
+                                     </div>
+                                </div>
+                               <div class="clearfix">
+                               <label class="form-label no-description" for="CategoryID">商品类型<em>*</em></label>
+                                    <div class="form-input">
+                                     @Html.DropDownList("CategoryID", string.Empty)
+                                     </div>
+                                </div>
+                               <div class="clearfix">
+                               @Html.LabelFor(model => model.Commodity, new { @class = "form-label no-decription" }, true)
+                                    <div class="form-input">
+                                      <select id="CommodityID" name="CommodityID" min ="0" data-val-min="请选择一项有效的商品"></select>
+                                     </div>
+                                </div>
+                               <div class="clearfix">
+                               @Html.LabelFor(model => model.Volume, new { @class = "form-label no-decription" }, true)
+                                    <div class="form-input">
+                                      <input type="text" id="Volume" name="Volume" class="text-box single-line" min ="1" data-val-min="字段 销售量 必须为大于 0 的数字。" required="required" data-val-required="销售量 字段是必需的。" />
+                                     </div>
+                                </div>
+                                   
+                                 <div class="form-action clearfix">
+                                    <button class="button" type="submit" data-icon-primary="ui-icon-circle-check">创建</button>
+                                    @Html.ActionLink("取消", "Index")
+                                </div>
+
+}
+                        </section>
+                    </div>

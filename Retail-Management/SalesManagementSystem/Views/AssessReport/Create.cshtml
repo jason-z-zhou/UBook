@@ -1,0 +1,62 @@
+﻿@model SalesManagementSystem.Models.AssessReport
+
+@{
+    ViewBag.Title = "创建新的评审报表";
+}
+
+<div class="portlet grid_12">
+    <header>
+        <h2>条目信息</h2>
+    </header>
+    <section>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm("Create", "AssessReport", FormMethod.Post, new { @class = "form has-validation" }))
+{
+            @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model=> model.AssessReportID)
+                <div class="clearfix">
+                    @Html.LabelFor(model => model.Store, new { @class = "form-label no-decription" }, true)
+                    <div class="form-input">
+                     @Html.DropDownList("StoreID", (IEnumerable<SelectListItem>)ViewBag.StoreID)
+                    </div>
+                </div>
+                <br />
+                
+                <div class="clearfix">
+                    @Html.LabelFor(model => model.AssessTime, new { @class = "form-label no-decription" }, true)   
+                    <div class="form-input">
+                        <input type="date" id="AssessTime" name="Date" class="text-box single-line" required="required" data-val-required="销售日期 字段是必需的。"/>
+                    </div>
+                </div>
+               
+                <hr/> 
+                     <div> 
+                  
+                     @{
+               List<SalesManagementSystem.Models.AssessItem> Assessitems = (List<SalesManagementSystem.Models.AssessItem>)ViewBag.AssessItems;
+               for (int i = 0; i < Assessitems.Count; i++)
+               {
+                   var item = Assessitems.ElementAt(i);
+                                <div class="clearfix">
+                                    <label class="form-label no-description" >@item.ItemName<em>*</em></label>
+                                    <div class="form-input"><input type="text" id = @item.AssessItemID.ToString() name="Grades" class="text-box single-line" min="0" max="@item.Score"  /></div>
+                                </div>
+                           <br/>
+               }
+                       }
+                   </div>    
+                <br/>
+                <div class="form-action clearfix">
+
+                    <button class="button" type="submit" data-icon-primary="ui-icon-circle-check">创建</button>
+
+                    <button class="button" type="reset">重置</button>
+
+                </div>
+                  
+              
+}
+    </section>
+</div>

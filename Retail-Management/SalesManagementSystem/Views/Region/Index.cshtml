@@ -1,0 +1,125 @@
+﻿@{
+    ViewBag.Title = "片区管理";
+}
+    <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/lib/gmap/gmap3.js")"></script> 
+    <style>
+      .gmap3{
+        border: 1px dashed #C0C0C0;
+        width: 100%;
+        height: 400px;
+      }
+    </style>
+    
+    <script type="text/javascript">
+
+        $(function () {
+            $.getJSON('/Store/AjaxGetStore', {}, function (data, status) {
+                init(data);
+            });
+        });
+
+        function init(villes) {
+            var data = [],
+            tmp = {},
+            r, k,
+            regions = [],
+            $dpts = $("#dpts");
+            for (var i = 0; i < villes.length; i++) {
+                data.push({
+                    lat: villes[i]['lat'],
+                    lng: villes[i]['lng'],
+                    tag: villes[i]['region'],
+                    data: villes[i]
+                });
+                tmp[villes[i]['region']] = true;
+            }
+            for (r in tmp) {
+                regions.push(r);
+            }
+            regions = regions.sort();
+
+            for (k in regions) {
+                $dpts.append('<input id="chk' + k + '" type="checkbox" checked><label for="chk' + k + '">' + regions[k] + '</label> ');
+                $("#chk" + k).uniform();
+            }
+            
+            $('input', $dpts).change(function () {
+                var region = $('label[for=' + $(this).attr('id') + ']', $dpts).html(),
+                checked = $(this).is(':checked'),
+                map = $('#allinone').gmap3('get'),
+                markers;
+
+                markers = $('#allinone').gmap3({
+                    action: 'get',
+                    name: 'marker',
+                    all: true,
+                    tag: region
+                });
+
+                $.each(markers, function (i, marker) {
+                    marker.setMap(checked ? map : null);
+                });
+
+            });
+
+            $('#allinone').gmap3(
+        { action: 'init',
+            options: {
+                center: [30.593087, 114.30535699999996],
+                zoom: 12
+            }
+        }, {
+            action: 'addMarkers',
+            markers: data,
+            marker: {
+                options: {
+                    draggable: false
+                },
+                events: {
+                    click: function (marker, event, msg) {
+                        var map = $(this).gmap3('get'),
+                      infowindow = $(this).gmap3({ action: 'get', name: 'infowindow' });
+                        var msgs = '<a href="@Url.Action("Details", "Store")/' + msg.dpts + '"><h5>' + msg.name + '</h5></a></p>地址：' + msg.address + '';
+                        if (infowindow) {
+                            infowindow.open(map, marker);
+                            infowindow.setContent(msgs);
+                        } else {
+                            $(this).gmap3({ action: 'addinfowindow', anchor: marker, options: { content: msgs} });
+                        }
+                    }
+                }
+            }
+        });
+
+        };
+    
+    </script>
+<div class="grid_12">
+                    <section class="tabs grid_12 leading">
+                        <ul class="clearfix">
+                            <li><a href="#"><h5>地图浏览</h5></a></li>
+                            <li><a href="#"><h5>列表浏览</h5></a></li>
+                        </ul>
+                        <section>
+                            <section class="clearfix">
+                                <header class="alpha omega">
+                                    <div class="message info"  style="text-align:left"><center><div id="dpts"></div></br></center></div>
+                                </header>
+                                <span>
+                                    <div id="allinone" class="gmap3"></div>
+                                </span>
+                            </section>
+                            <section class="clearfix">
+                                <div id="demo" class="clearfix"> 
+                                    @Html.DataTables((SalesManagementSystem.Models.DataTables)ViewBag.DataTable, "<a href='" + Url.Action("Edit") + "/{0}'>编辑</a> | " + "<a href='" + Url.Action("Delete") + "/{0}'>删除</a> | " + "<a href='" + Url.Action("ShowStores") + "/{0}'>显示辖区商店</a>")
+                                </div> 
+                                <div class="form-action clearfix">
+                                    <input type="button" value = "增加片区" onClick="location.href='@Url.Action("Create", "Region")'"/>
+                                </div>
+                            </section>
+                        </section>
+                    </section>
+                    
+
+</div>

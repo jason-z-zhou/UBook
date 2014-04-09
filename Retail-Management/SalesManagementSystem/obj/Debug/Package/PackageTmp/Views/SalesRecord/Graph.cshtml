@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "销售记录分析";
+}
+
+  <script language="javascript" type="text/javascript" src="@Url.Content("~/Content/lib/jqplot/jquery.jqplot.js")"></script>
+  <script language="javascript" type="text/javascript" src="@Url.Content("~/Content/lib/jqplot/plugins/jqplot.highlighter.js")"></script>
+  <script language="javascript" type="text/javascript" src="@Url.Content("~/Content/lib/jqplot/plugins/jqplot.cursor.js")"></script>
+  <script language="javascript" type="text/javascript" src="@Url.Content("~/Content/lib/jqplot/plugins/jqplot.dateAxisRenderer.js")"></script>
+
+  <script type="text/javascript" language="javascript">
+
+      $(document).ready(function () {
+          $.jqplot.config.enablePlugins = true;
+
+          $.jqplot('chart1', [
+@{
+    foreach (var item in (List < List < SalesManagementSystem.Controllers.GraphNode >> )ViewBag.DataList)
+    {
+        <text>[</text>
+        foreach (var subitem in ( List < SalesManagementSystem.Controllers.GraphNode >) item)
+        {
+            <text>['@subitem.Date', @subitem.Volume], </text>
+        }
+        <text>[]],</text>
+    }
+    <text>[]</text>
+}
+          ], {
+              legend: { show: true },
+              axes: {
+                  xaxis: {
+                      renderer: $.jqplot.DateAxisRenderer,
+                      tickOptions: { formatString: '%Y/%#m/%#d' },
+                      tickInterval: '1 week'
+                  }
+              },
+              highlighter: {
+                  show: true,
+                  sizeAdjust: 7.5
+              },
+              cursor: {
+                  show: false
+              },
+              series: [
+@{
+    foreach (var item in (List<string>)ViewBag.NameList)
+    {
+        <text>{ label: '@item', showLabel: true },</text>
+    }
+    <text>{showLabel: false}</text>
+}
+      ]
+          });
+
+      });
+  
+  </script>
+  <div id="chart1" style=""></div>
+                      <div class="form-action clearfix">
+        <input type="button" value = "返回上一页" onClick="location.href='javascript:history.go(-1);'"/>
+    </div>

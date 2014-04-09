@@ -1,0 +1,36 @@
+﻿@model SalesManagementSystem.Models.AssessItem
+
+@{
+    ViewBag.Title = "评分条目详情";
+}
+<div class="portlet grid_12">
+    <header>
+        <h2>条目信息</h2>
+    </header>
+    <section>
+
+@using (Html.BeginForm("Delete", "AssessItem", FormMethod.Post, new { @class = "form has-validation" }))
+{
+    <div class="clearfix">
+        @Html.LabelFor((model => model.ItemName), new { @class = "form-label no-description" }, true)
+        <div class="form-input">@Html.DisplayFor(model => model.ItemName)</div>
+    </div>
+
+    <div class="clearfix">
+        @Html.LabelFor(model => model.Score, new { @class = "form-label no-description" }, true)
+        <div class="form-input">@Html.DisplayFor(model => model.Score)</div>
+    </div>
+
+    <div class="clearfix">
+        @Html.LabelFor(model => model.Description, new { @class = "form-label no-description" })
+        <div class="form-input">@Html.DisplayFor(model => model.Description)</div>
+    </div>
+   
+    <div class="clearfix" align=center>
+        <input type="button" value = "编辑" onClick="location.href='@Url.Action("Edit", new { id = Model.AssessItemID })'"/>
+         <input type="button" value = "返回上一页" onClick="location.href='javascript:history.go(-1);'"/>
+    
+    </div>
+}
+    </section>
+</div>

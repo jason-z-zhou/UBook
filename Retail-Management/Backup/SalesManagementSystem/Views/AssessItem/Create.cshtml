@@ -1,0 +1,45 @@
+﻿@model SalesManagementSystem.Models.AssessItem
+
+@{
+    ViewBag.Title = "创建评分条目";
+}
+<div class="portlet grid_12">
+    <header>
+        <h2>条目信息</h2>
+    </header>
+    <section>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+        @using (Html.BeginForm("Create", "AssessItem", FormMethod.Post, new { @class = "form has-validation" })) {
+            @Html.ValidationSummary(true)
+                <div class="clearfix">
+                    @Html.LabelFor(model => model.ItemName, new { @class = "form-label no-decription" }, true)
+                    <div class="form-input">
+                        @Html.EditorFor(model => model.ItemName)
+                    </div>
+                </div>
+                <br />
+                <div class="clearfix">
+                    @Html.LabelFor(model => model.Score, new { @class = "form-label no-decription" }, true)   
+                    <div class="form-input">
+                        @Html.EditorFor(model => model.Score)
+                    </div>
+                </div>
+                <br />
+                <div class="clearfix">
+                    @Html.LabelFor(model => model.Description, new { @class = "form-label no-decription" })
+                    <div class="form-input">
+                        @Html.EditorFor(model => model.Description)
+                    </div>
+                </div>
+                <div class="form-action clearfix">
+
+                    <button class="button" type="submit" data-icon-primary="ui-icon-circle-check">创建</button>
+
+                    <button class="button" type="reset">重置</button>
+
+                </div>
+        }
+    </section>
+</div>

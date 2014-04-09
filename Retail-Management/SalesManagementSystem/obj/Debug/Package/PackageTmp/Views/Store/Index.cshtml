@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "销售点列表";
+}
+         
+    <div class="grid_12">
+        <div id="demo" class="clearfix"> 
+            @Html.DataTables((SalesManagementSystem.Models.DataTables)ViewBag.DataTable, "<a href='" + Url.Action("Edit") + "/{0}'>编辑</a>" + "|" + "<a href='" + Url.Action("Details") + "/{0}'>详细</a>" + "|" + "<a href='" + Url.Action("Delete") + "/{0}'>删除</a>" + "|" + "<a href='" + Url.Action("AddEmployees") + "/{0}'>添加负责人</a>" + "|" + "<a href='" + Url.Action("DropEmployees") + "/{0}'>删除负责人</a>" + "|" + "<a href='" + Url.Action("AddInspectors") + "/{0}'>添加检查员</a>" + "|" + "<a href='" + Url.Action("DropInspectors") + "/{0}'>删除检查员</a>")
+        </div> 
+        <div class="form-action clearfix">
+            <input type="button" value = "增加新销售点" onClick="location.href='@Url.Action("Create", "Store")'"/>
+        </div>
+        
+        </div>

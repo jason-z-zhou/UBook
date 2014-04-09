@@ -1,0 +1,40 @@
+D:\ohehe\SalesManagementSystem\SalesManagementSystem\SalesManagementSystem\obj\Debug\ResolveAssemblyReference.cache
+D:\ohehe\SalesManagementSystem\SalesManagementSystem\SalesManagementSystem\bin\SalesManagementSystem.dll
+D:\ohehe\SalesManagementSystem\SalesManagementSystem\SalesManagementSystem\bin\SalesManagementSystem.pdb
+D:\ohehe\SalesManagementSystem\SalesManagementSystem\SalesManagementSystem\obj\Debug\SalesManagementSystem.dll
+D:\ohehe\SalesManagementSystem\SalesManagementSystem\SalesManagementSystem\obj\Debug\SalesManagementSystem.pdb
+D:\SalesManagementSystem1\SalesManagementSystem\SalesManagementSystem\bin\SalesManagementSystem.dll
+D:\SalesManagementSystem1\SalesManagementSystem\SalesManagementSystem\bin\SalesManagementSystem.pdb
+D:\SalesManagementSystem1\SalesManagementSystem\SalesManagementSystem\obj\Debug\ResolveAssemblyReference.cache
+D:\SalesManagementSystem1\SalesManagementSystem\SalesManagementSystem\obj\Debug\SalesManagementSystem.dll
+D:\SalesManagementSystem1\SalesManagementSystem\SalesManagementSystem\obj\Debug\SalesManagementSystem.pdb
+C:\Documents and Settings\Administrator\桌面\SalesManagementSystem\SalesManagementSystem\bin\SalesManagementSystem.dll
+C:\Documents and Settings\Administrator\桌面\SalesManagementSystem\SalesManagementSystem\bin\SalesManagementSystem.pdb
+C:\Documents and Settings\Administrator\桌面\SalesManagementSystem\SalesManagementSystem\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\桌面\SalesManagementSystem\SalesManagementSystem\obj\Debug\SalesManagementSystem.dll
+C:\Documents and Settings\Administrator\桌面\SalesManagementSystem\SalesManagementSystem\obj\Debug\SalesManagementSystem.pdb
+C:\Users\Administrator\Desktop\SalesManagementSystem\SalesManagementSystem\bin\SalesManagementSystem.dll
+C:\Users\Administrator\Desktop\SalesManagementSystem\SalesManagementSystem\bin\SalesManagementSystem.pdb
+C:\Users\Administrator\Desktop\SalesManagementSystem\SalesManagementSystem\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\SalesManagementSystem\SalesManagementSystem\obj\Debug\SalesManagementSystem.dll
+C:\Users\Administrator\Desktop\SalesManagementSystem\SalesManagementSystem\obj\Debug\SalesManagementSystem.pdb
+D:\SalesManagementSystem\SalesManagementSystem\bin\SalesManagementSystem.dll
+D:\SalesManagementSystem\SalesManagementSystem\bin\SalesManagementSystem.pdb
+D:\SalesManagementSystem\SalesManagementSystem\obj\Debug\ResolveAssemblyReference.cache
+D:\SalesManagementSystem\SalesManagementSystem\obj\Debug\SalesManagementSystem.dll
+D:\SalesManagementSystem\SalesManagementSystem\obj\Debug\SalesManagementSystem.pdb
+C:\Users\Administrator\Desktop\备份\SalesManagementSystem\SalesManagementSystem\bin\SalesManagementSystem.dll
+C:\Users\Administrator\Desktop\备份\SalesManagementSystem\SalesManagementSystem\bin\SalesManagementSystem.pdb
+C:\Users\Administrator\Desktop\备份\SalesManagementSystem\SalesManagementSystem\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\备份\SalesManagementSystem\SalesManagementSystem\obj\Debug\SalesManagementSystem.dll
+C:\Users\Administrator\Desktop\备份\SalesManagementSystem\SalesManagementSystem\obj\Debug\SalesManagementSystem.pdb
+C:\Users\lipengzhen\Desktop\SalesManagementSystem_new\SalesManagementSystem\SalesManagementSystem\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\lipengzhen\Desktop\SalesManagementSystem_new\SalesManagementSystem\SalesManagementSystem\obj\Debug\SalesManagementSystem.dll
+C:\Users\lipengzhen\Desktop\SalesManagementSystem_new\SalesManagementSystem\SalesManagementSystem\obj\Debug\SalesManagementSystem.pdb
+C:\Users\lipengzhen\Desktop\SalesManagementSystem_new\SalesManagementSystem\SalesManagementSystem\bin\SalesManagementSystem.dll
+C:\Users\lipengzhen\Desktop\SalesManagementSystem_new\SalesManagementSystem\SalesManagementSystem\bin\SalesManagementSystem.pdb
+C:\Users\Administrator\Desktop\SalesManagementSystem_new\SalesManagementSystem\SalesManagementSystem\bin\SalesManagementSystem.dll
+C:\Users\Administrator\Desktop\SalesManagementSystem_new\SalesManagementSystem\SalesManagementSystem\bin\SalesManagementSystem.pdb
+C:\Users\Administrator\Desktop\SalesManagementSystem_new\SalesManagementSystem\SalesManagementSystem\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\SalesManagementSystem_new\SalesManagementSystem\SalesManagementSystem\obj\Debug\SalesManagementSystem.dll
+C:\Users\Administrator\Desktop\SalesManagementSystem_new\SalesManagementSystem\SalesManagementSystem\obj\Debug\SalesManagementSystem.pdb

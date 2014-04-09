@@ -1,0 +1,41 @@
+﻿@model SalesManagementSystem.Models.Region
+
+@{
+    ViewBag.Title = "Delete";
+}
+<h3>确定要删除此分区吗？</h3>
+<div class="portlet grid_12">
+        <header>
+            <h2>分区信息</h2>
+        </header>
+        <section>
+@using (Html.BeginForm("Delete", "User", FormMethod.Post, new { @class = "form has-validation" }))
+        {
+     @Html.ValidationSummary(true)
+    <div class="clearfix">
+        @Html.LabelFor((model => model.RegionID), new { @class = "form-label no-description" }, false)
+        <div class="form-input">@Html.DisplayFor(model => model.RegionID)</div>
+    </div>
+    
+    <div class="clearfix">
+        @Html.LabelFor((model => model.RegionName), new { @class = "form-label no-description" }, false)
+        <div class="form-input">@Html.DisplayFor(model => model.RegionName)</div>
+    </div>
+
+    <div class="clearfix">
+        @Html.LabelFor((model => model.Address), new { @class = "form-label no-description" }, false)
+        <div class="form-input">@Html.DisplayFor(model => model.Address)</div>
+    </div>
+    
+    <p>
+        <input type="submit" value="删除" /> 
+    </p>
+    <p>
+        <input type="button" value = "返回上一页" onClick="location.href='javascript:history.go(-1);'"/>
+    
+    </p>
+        }
+
+      </section>
+</div>
+    

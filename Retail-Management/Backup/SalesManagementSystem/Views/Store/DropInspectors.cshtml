@@ -1,0 +1,91 @@
+﻿@model SalesManagementSystem.Models.Store
+@{
+    ViewBag.Title = "删除检查员";
+}
+                    <div class="portlet grid_12">
+                        <header>
+                            <h2>检查员</h2>
+                        </header>
+                        <section>
+
+
+  @if (ViewData["Statue"] != null)
+  {
+    
+       @Html.Label("删除成功，返回？")
+       <br />
+       @Html.ActionLink("返回", "Index") 
+    
+}
+@using (Html.BeginForm("DropInspectors", "Store", FormMethod.Post, new { @class = "form has-validation" }))
+{
+    @Html.ValidationSummary(true)
+
+                                <div class="clearfix">
+
+                                    @Html.LabelFor((model => model.StoreName), new { @class = "form-label no-description" }, true)
+
+                                    <div class="form-input">@Html.EditorFor(model => model.StoreName)</div>
+
+                                </div>
+                               <div class="clearfix">
+
+                                    @Html.LabelFor((model => model.Inspectors), new { @class = "form-label no-description" })
+                                      @if (ViewBag.User_UserID != null)
+                                  {
+            
+                                 <div class="form-input">
+                                       @Html.DropDownList("User_UserID", string.Empty)
+                                      @Html.ValidationMessageFor(model => model.Inspectors)
+                                    </div>
+            
+                                  }
+                                    else
+                                    {
+                                    @Html.Label("无检查员")
+                                    }
+                                    
+                                   
+                                     </div>
+                                    <div class="form-input">
+                                     
+                                     </div>
+
+                                   
+                                 <div class="form-action clearfix">
+
+                                    <button class="button" type="submit" data-icon-primary="ui-icon-circle-check">删除</button>
+
+                                   @Html.ActionLink("取消", "Index")
+
+                                </div>
+
+}
+                        </section>
+                    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

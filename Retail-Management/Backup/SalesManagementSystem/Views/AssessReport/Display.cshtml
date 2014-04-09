@@ -1,0 +1,14 @@
+﻿@model IEnumerable<SalesManagementSystem.Models.AssessReport>
+
+@{
+    ViewBag.Title = ViewBag.StoreName + "评估列表";
+}
+
+<div class="grid_12">
+        <div id="demo" class="clearfix"> 
+            @Html.DataTables((SalesManagementSystem.Models.DataTables)ViewBag.DataTable)
+        </div>
+        <div class="form-action clearfix">
+            <input type="button" value = "增加新评估" onClick="location.href='@Url.Action("Create", "AssessReport")'"/>
+        </div>
+    </div>

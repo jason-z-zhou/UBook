@@ -1,0 +1,50 @@
+﻿@model SalesManagementSystem.Models.User
+
+@{
+    ViewBag.Title = "修改个人信息";
+}
+<div class="portlet grid_12">
+        <header>
+            <h2>个人信息</h2>
+        </header>
+
+        <section>
+         
+        @using (Html.BeginForm("ChangePersonelInfo", "User", FormMethod.Post, new { @class = "form has-validation" }))
+        {
+            
+                @Html.ValidationSummary(true)
+
+                @Html.HiddenFor(model => model.UserID)
+                <div class="clearfix">
+                    @Html.LabelFor((model => model.UserName), new { @class = "form-label no-description" })
+                    <div class="form-input" >@Html.Label(Model.UserName)</div>
+                </div>
+                    
+                <div class="clearfix">
+                    @Html.LabelFor((model => model.LastName), new { @class = "form-label no-description" })
+                    <div class="form-input">@Html.EditorFor(model => model.LastName)</div>
+                </div>
+            
+                <div class="clearfix">
+                    @Html.LabelFor((model => model.FirstName), new { @class = "form-label no-description" })
+                    <div class="form-input">@Html.EditorFor(model => model.FirstName)</div>
+                </div>
+                     
+                <div class="clearfix">
+                    @Html.LabelFor((model => model.Email), new { @class = "form-label no-description" })
+                    <div class="form-input">@Html.EditorFor(model => model.Email)</div>
+                </div>
+            
+                <div class="clearfix">
+                    @Html.LabelFor((model => model.Tel), new { @class = "form-label no-description" })
+                    <div class="form-input">@Html.EditorFor(model => model.Tel)</div>
+                </div>
+                <div class="form-action clearfix">
+                        <button class="button" type="submit" data-icon-primary="ui-icon-circle-check">保存</button>
+                    <input type="button" value = "返回上一页" onClick="location.href='javascript:history.go(-1);'"/>
+</div>
+        }
+
+</section>
+</div>

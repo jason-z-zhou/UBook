@@ -1,0 +1,377 @@
+﻿@model SalesManagementSystem.Models.Store
+
+@{
+    ViewBag.Title = "创建新销售点";
+}
+    <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/lib/gmap/gmap3.js")"></script> 
+    <style>
+    	#ctrl{
+        width: 500px;
+        margin:0 auto;
+      }
+      .gmap3{
+        border: 1px dashed #C0C0C0;
+        width: 500px;
+        height: 250px;
+      }
+      #googleMap{
+        border: 1px dashed #C0C0C0;
+        width: 75%;
+        height: 700px;
+      }
+      #menu{
+        background-color: #FFFFFF;
+        width:170px;
+        height:120px;
+        padding:0px;
+        border:1px;
+        cursor:pointer;
+        border-left:1px solid #cccccc;
+        border-top:1px solid #cccccc;
+        border-right:1px solid #676767;
+        border-bottom:1px solid #676767;
+      }
+      #menu .item{
+        font-family: arial,helvetica,sans-serif;
+        font-size: 12px;
+        text-align:left;
+        line-height: 30px;
+        border-left:0px;
+        border-top:0px;
+        border-right:0px;
+        padding-left:30px;
+        background-repeat: no-repeat;
+        background-position: 4px center;
+      }
+      #menu .item.addHere{
+        background-image: url(@Url.Content("~/Content/images/add.png"));
+      }
+      #menu .item.zoomIn{
+        background-image: url(@Url.Content("~/Content/images/zoomin.png"));
+      }
+      #menu .item.zoomOut{
+        background-image: url(@Url.Content("~/Content/images/zoomout.png"));
+      }
+      #menu .item.centerHere{
+        background-image: url(@Url.Content("~/Content/images/here.png"));
+      }
+      #menu .item.hover{
+        background-color: #d6e9f8;
+      }
+      #menu .item.separator{
+        border-bottom:1px solid #cccccc;
+      }
+    </style>
+    
+    <script type="text/javascript">
+    
+      /**************************************************
+       *                      Menu
+       **************************************************/
+       
+      function Menu($div){
+        var that = this, 
+            ts = null;
+        
+        this.$div = $div;
+        this.items = [];
+        
+        // create an item using a new closure 
+        this.create = function(item){
+          var $item = $('<div class="item '+item.cl+'">'+item.label+'</div>');
+          $item
+            // bind click on item
+            .click(function(){
+              if (typeof(item.fnc) === 'function'){
+                item.fnc.apply($(this), []);
+              }
+            })
+            // manage mouse over coloration
+            .hover(
+              function(){$(this).addClass('hover');},
+              function(){$(this).removeClass('hover');}
+            );
+          return $item;
+        };
+        this.clearTs = function(){
+          if (ts){
+            clearTimeout(ts);
+            ts = null;
+          }
+        };
+        this.initTs = function(t){
+          ts = setTimeout(function(){that.close()}, t);
+        };
+      }
+      
+      // add item
+      Menu.prototype.add = function(label, cl, fnc){
+        this.items.push({
+          label:label,
+          fnc:fnc,
+          cl:cl
+        });
+      }
+      
+      // close previous and open a new menu 
+      Menu.prototype.open = function(event){
+        this.close();
+        var k,
+            that = this,
+            offset = {
+              x:0, 
+              y:0
+            },
+            $menu = $('<div id="menu"></div>');
+            
+        // add items in menu
+        for(k in this.items){
+          $menu.append(this.create(this.items[k]));
+        }
+        
+        // manage auto-close menu on mouse hover / out
+        $menu.hover(
+          function(){that.clearTs();},
+          function(){that.initTs(3000);}
+        );
+        
+        // change the offset to get the menu visible (#menu width & height must be defined in CSS to use this simple code)
+        if ( event.pixel.y + $menu.height() > this.$div.height()){
+          offset.y = -$menu.height();
+        }
+        if ( event.pixel.x + $menu.width() > this.$div.width()){
+          offset.x = -$menu.width();
+        }
+        
+        // use menu as overlay
+        this.$div.gmap3({
+          action:'addOverlay',
+          latLng: event.latLng,
+          content: $menu,
+          offset: offset
+        });
+        
+        // start auto-close
+        this.initTs(5000);
+      }
+      
+      // close the menu
+      Menu.prototype.close = function(){
+        this.clearTs();
+        this.$div.gmap3({action:'clear', name:'overlay'});
+      }
+      
+      
+      /**************************************************
+       *                      Main
+       **************************************************/
+    
+      $(function(){
+      
+        var $map = $('#test'), 
+            menu = new Menu($map),
+            
+            current,  // current click event (used to save as start / end position)
+            center = [30, 114];
+
+            $('#test-ok').click(function () {
+                var addr = $('#Address').val();
+                if (!addr || !addr.length) return;
+                $("#test").gmap3({
+                    action: 'getlatlng',
+                    address: addr,
+                    callback: function (results) {
+                        if (!results) return;
+                        $('#Longitude').val(results[0].geometry.location.La);
+                        $('#Latitude').val(results[0].geometry.location.Ka);
+                        $(this).gmap3({
+                            action: 'clear',
+                            name: 'marker'
+                        });
+                        $(this).gmap3({
+                            action: 'addMarker',
+                            latLng: results[0].geometry.location,
+                            map: {
+                                zoom: 15,
+                                center: true
+                            },
+    marker:{
+      options:{
+        draggable: false
+      }
+    }
+                        });
+                    }
+                });
+            });
+
+            $('#Address').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    $('#test-ok').click();
+                }
+            });
+
+        // add marker and manage which one it is (A, B)
+        function addMarker(){
+        
+          $('#Longitude').val(current.latLng.La);
+          $('#Latitude').val(current.latLng.Ka);
+          // clear previous marker if set
+          var clear = {action:'clear', name:'marker'};
+          $map.gmap3(clear);
+          // add marker and store it
+          $map.gmap3({
+            action:'addMarker',
+            latLng:current.latLng,
+            options:{
+              draggable:false,
+            }
+          });
+        }
+        
+        // MENU : ITEM 1
+        menu.add('在此添加销售点', 'addHere separator', 
+          function(){
+            menu.close();
+            addMarker();
+          });
+        
+        // MENU : ITEM 3
+        menu.add('放大', 'zoomIn', 
+          function(){
+            var map = $map.gmap3('get');
+            map.setZoom(map.getZoom() + 1);
+            menu.close();
+          });
+        
+        // MENU : ITEM 4
+        menu.add('缩小', 'zoomOut',
+          function(){
+            var map = $map.gmap3('get');
+            map.setZoom(map.getZoom() - 1);
+            menu.close();
+          });
+        
+        // MENU : ITEM 5
+        menu.add('在此居中放置地图', 'centerHere', 
+          function(){
+              $map.gmap3('get').setCenter(current.latLng);
+              menu.close();
+          });
+        
+        // INITIALIZE GOOGLE MAP
+        $map.gmap3(
+          { action: 'init',
+            options:{
+              center:center,
+              zoom: 2
+            },
+            events:{
+              rightclick:function(map, event){
+                current = event;
+                menu.open(current);
+              },
+              click: function(){
+                menu.close();
+              },
+              dragstart: function(){
+                menu.close();
+              },
+              zoom_changed: function(){
+                menu.close();
+              }
+            }
+          },
+          // add direction renderer to configure options (else, automatically created with default options)
+          { action:'addDirectionsRenderer',
+            preserveViewport: true,
+            markerOptions:{
+              visible: false
+            }
+          },
+          // add a direction panel
+          { action:'setDirectionsPanel',
+            id : 'directions'
+          }
+        );
+      });
+    </script>
+                        <div class="portlet grid_12">
+                        <header>
+                            <h2>销售点信息</h2>
+                        </header>
+                        <section>
+
+@using (Html.BeginForm("Create", "Store", FormMethod.Post, new { @class = "form has-validation" }))
+{
+    @Html.ValidationSummary(true)
+   
+                                <div class="clearfix">
+
+                                    @Html.LabelFor((model => model.StoreName), new { @class = "form-label no-description" })
+
+                                    <div class="form-input">@Html.EditorFor(model => model.StoreName)</div>
+
+                                </div>
+                                 <div class="clearfix">
+
+                                    @Html.LabelFor((model => model.CreationTime), new { @class = "form-label no-description" })
+
+                                    <div class="form-input"><input type="date" id="CreationTime" name="CreationTime" class="text-box single-line"    required="required" data-val-required="创建时间 字段是必需的。"/></div>
+
+                                </div>
+                               <div class="clearfix">
+
+                                    @Html.LabelFor((model => model.Address), new { @class = "form-label no-description" })
+
+                                    <div class="form-input">@Html.EditorFor(model => model.Address)  <button type="button" id="test-ok">查找</button></div>
+
+                                </div>
+                                <div class="clearfix">
+
+                                    @Html.LabelFor((model => model.Longitude), new { @class = "form-label no-description" })
+
+                                    <div class="form-input">@Html.EditorFor(model => model.Longitude)</div>
+
+                                </div>
+                            <div class="clearfix">
+
+                                    @Html.LabelFor((model => model.Latitude), new { @class = "form-label no-description" })
+
+                                    <div class="form-input">@Html.EditorFor(model => model.Latitude)</div>
+
+                                </div>
+<div class="clearfix">
+                                <label for="Map" class="form-label no-description">地图</label>
+                                <div class="form-input">
+                                    <div id="test" class="gmap3"></div>
+                                </div>
+                            </div>
+                              <div class="clearfix">
+
+                                    @Html.LabelFor((model => model.Comment), new { @class = "form-label no-description" })
+
+                                    <div class="form-input">@Html.EditorFor(model => model.Comment)</div>
+
+                                </div>
+                                <div class="clearfix">
+
+                                    @Html.LabelFor((model => model.Region), new { @class = "form-label no-description" })
+
+                                    <div class="form-input">
+                                     @Html.DropDownList("RegionID", string.Empty)
+                                      @Html.ValidationMessageFor(model => model.Region.RegionID)
+                                     </div>
+
+                                </div>
+
+                                <div class="form-action clearfix">
+
+                                    <button class="button" type="submit" data-icon-primary="ui-icon-circle-check">添加</button>
+
+        <input type="button" value = "返回上一页" onClick="location.href='javascript:history.go(-1);'"/>
+</div>
+}
+                        </section>
+                    </div>

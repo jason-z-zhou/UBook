@@ -1,0 +1,160 @@
+﻿@model SalesManagementSystem.Models.Store
+@{
+    ViewBag.Title = "销售点详细信息";
+}
+    <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/lib/gmap/gmap3.js")"></script> 
+    <style>
+      .gmap3{
+        border: 1px dashed #C0C0C0;
+        width: 500px;
+        height: 250px;
+      }
+    </style>
+    
+    <script type="text/javascript">
+        $(function () {
+
+            $('#test1').gmap3(
+          { action: 'addMarker',
+              latLng: [@Model.Latitude, @Model.Longitude],
+              map: {
+                  center: true,
+                  zoom: 15,
+              },
+              marker: {
+                  options: {
+                      draggable: false
+                  }
+              }
+          }
+          );
+        });
+    </script>
+                    <div class="portlet grid_12">
+                        <header>
+                            <h2>销售点信息</h2>
+                        </header>
+                        <section>
+                       
+@using (Html.BeginForm("Details", "Store", FormMethod.Post, new { @class = "form has-validation" }))
+{
+    @Html.ValidationSummary(true)
+
+                                <div class="clearfix">
+
+                                    @Html.LabelFor((model => model.StoreName), new { @class = "form-label no-description" })
+
+                                    <div class="form-input">@Html.DisplayFor(model => model.StoreName)</div>
+
+                                </div>
+                                 <div class="clearfix">
+
+                                    @Html.LabelFor((model => model.CreationTime), new { @class = "form-label no-description" })
+
+                                    <div class="form-input">@Html.DisplayFor(model => model.CreationTime)</div>
+
+                                </div>
+                               <div class="clearfix">
+
+                                    @Html.LabelFor((model => model.Address), new { @class = "form-label no-description" })
+
+                                    <div class="form-input">@Html.DisplayFor(model => model.Address)</div>
+
+                                </div>
+    
+                              <div class="clearfix">
+
+                                    @Html.LabelFor((model => model.Address), new { @class = "form-label no-description" })
+
+                                    <div class="form-input">@Html.DisplayFor(model => model.Longitude)</div>
+
+                                </div>
+                          <div class="clearfix">
+
+                                    @Html.LabelFor((model => model.Address), new { @class = "form-label no-description" })
+
+                                    <div class="form-input">@Html.DisplayFor(model => model.Latitude)</div>
+
+                                </div>
+                          <div class="clearfix">
+
+                                   <label for="Map" class="form-label no-description">地图</label>
+
+                                    <div class="form-input"><div id="test1" class="gmap3"></div></div>
+
+                                </div>
+                                  <div class="clearfix">
+
+                                    @Html.LabelFor((model => model.Region), new { @class = "form-label no-description" })
+
+                                    <div class="form-input">@Html.DisplayFor(model => model.Region.RegionName)</div>
+
+                                </div>
+                                 <div class="clearfix">
+
+                                    @Html.LabelFor((model => model.Comment), new { @class = "form-label no-description" })
+
+                                    <div class="form-input">@Html.DisplayFor(model => model.Comment)</div>
+
+                                </div>
+                              <div class="clearfix">
+                              <label class="form-label no-description" for="Region">检查员</label>
+                              <div class="form-input">
+                             @if (ViewData["Inspectors"] != null)
+                             {
+                                 List<SalesManagementSystem.Models.User> user = (List<SalesManagementSystem.Models.User>)ViewData["Inspectors"];
+                                 if (user.Count() != 0)
+                                 {
+                                     foreach (SalesManagementSystem.Models.User u in user)
+                                     {
+                
+                    @Html.Label(u.UserName)
+                    <br />
+                
+                                     }
+                                 }
+                                 else
+                                 {
+              
+                       @Html.Label("暂无检查员")
+                    <br />
+                
+                                 }
+                             }
+    </div> </div>
+
+     <div class="clearfix"><label class="form-label no-description" for="Region">负责人</label>
+     <div class="form-input">
+        @if (ViewData["Employees"] != null)
+        {
+            List<SalesManagementSystem.Models.User> user = (List<SalesManagementSystem.Models.User>)ViewData["Employees"];
+            if (user.Count() != 0)
+            {
+                foreach (SalesManagementSystem.Models.User u in user)
+                {
+                
+                    @Html.Label(u.UserName)
+                    <br />
+                
+                }
+            }
+            else
+            {
+                
+                     @Html.Label("暂无负责人")
+                    <br />
+                
+            }
+        }
+    </div></div>
+                    <div class="form-action clearfix">
+        <input type="button" value = "返回上一页" onClick="location.href='javascript:history.go(-1);'"/>
+    </div>
+}
+                        </section>
+                        
+                    </div>
+
+
+

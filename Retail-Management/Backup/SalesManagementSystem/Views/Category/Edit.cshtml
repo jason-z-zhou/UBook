@@ -1,0 +1,35 @@
+﻿@model SalesManagementSystem.Models.Category
+
+@{
+    ViewBag.Title = "修改商品类型";
+}
+
+<div class="portlet grid_12">
+        <header>
+            <h2>商品类型信息</h2>
+        </header>
+        <section>
+  @using (Html.BeginForm("Edit", "Category", FormMethod.Post, new { @class = "form has-validation" }))
+        {
+            @Html.ValidationSummary(true)
+
+
+                @Html.HiddenFor(model => model.CategoryID)
+                <div class="clearfix">
+                    @Html.LabelFor((model => model.CategoryName), new { @class = "form-label no-description" }, true)
+                    <div class="form-input" >@Html.EditorFor(model => model.CategoryName)</div>
+                </div>
+                    
+                <div class="clearfix">
+                    @Html.LabelFor((model => model.Description), new { @class = "form-label no-description" }, true)
+                    <div class="form-input">@Html.EditorFor(model => model.Description)</div>
+                </div>
+            
+                <div class="form-action clearfix">
+                        <button class="button" type="submit" data-icon-primary="ui-icon-circle-check">保存</button>
+                 <input type="button" value = "返回上一页" onClick="location.href='javascript:history.go(-1);'"/>
+    </div>
+        }
+
+</section>
+</div>  

@@ -1,0 +1,16 @@
+﻿@model IEnumerable<SalesManagementSystem.Models.Category>
+
+@{
+    ViewBag.Title = ViewBag.CategoryName + "类商品列表";
+}
+
+<p style="font-size: 12pt;">      
+                    
+       <div class="grid_12">
+        <div id="demo" class="clearfix"> 
+             @Html.DataTables((SalesManagementSystem.Models.DataTables)ViewBag.DataTable, "<a href='" + Url.Action("Details", "Commodity") + "/{0}'>详细信息</a>")
+                        </div> 
+                    </div>
+                                    <div class="form-action clearfix">
+        <input type="button" value = "返回上一页" onClick="location.href='javascript:history.go(-1);'"/>
+    </div>
